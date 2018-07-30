@@ -1,0 +1,28 @@
+{
+  "name": "gulpstart",
+  "version": "1.0.0",
+  "description": "Automate all things with gulp and enhance development workflow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericpham380/gulpstart.git"
+  },
+  "keywords": [
+    "gulp",
+    "automation",
+    "development",
+    "workflow"
+  ],
+  "author": "Eric Pham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericpham380/gulpstart/issues"
+  },
+  "homepage": "https://github.com/ericpham380/gulpstart#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

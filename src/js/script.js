@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var para = document.getElementById('paragraph');
 
   button.innerHTML = "Display status";
+  para.style.backgroundColor = "#e74c3c";
+  para.style.color = "white";
 
   button.addEventListener("click", function() {
     if(para.className === 'hidden') {

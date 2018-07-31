@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
+var webserver = require('gulp-webserver');
 
 var paths = {
   src: 'src/**/*',
@@ -55,5 +56,14 @@ gulp.task('inject', ['copy'], function() {
     .pipe(inject(css, { relative: true } ))
     .pipe(inject(js, { relative: true } ))
     .pipe(gulp.dest(paths.tmp));
+});
+
+/* Serve the development web server */
+gulp.task('serve', ['inject'], function() {
+  return gulp.src(paths.tmp)
+    .pipe(webserver({
+      port: 3000,
+      livereload: true
+    }));
 });
 

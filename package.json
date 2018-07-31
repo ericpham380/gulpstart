@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ericpham380/gulpstart#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.3.2"
   }
 }

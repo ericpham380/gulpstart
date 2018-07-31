@@ -5,6 +5,7 @@ var htmlclean = require('gulp-htmlclean');
 var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var del = require('del');
 var paths = {
   src: 'src/**/*',
   srcHTML: 'src/**/*.html',
@@ -113,4 +114,9 @@ gulp.task('inject:dist', ['copy:dist'], function() {
 })
 
 gulp.task('build', ['inject:dist']);
+
+/* Delete both tmp and dist directories and never push them to GitHub repository */
+gulp.task('clean', function() {
+  del([paths.tmp, paths.dist]);
+})
 

@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 10px;
 }
 
 .title {
@@ -17,4 +17,8 @@ body {
 
 .d-block {
   display: block;
+}
+
+button {
+  padding: 5px;
 }

@@ -67,3 +67,7 @@ gulp.task('serve', ['inject'], function() {
     }));
 });
 
+/* Watch src directory for changes and reload the web server */
+gulp.task('watch', ['serve'], function() {
+  gulp.watch(paths.src, ['inject']);
+});

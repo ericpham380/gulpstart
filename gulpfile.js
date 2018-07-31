@@ -1,7 +1,10 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
 var webserver = require('gulp-webserver');
-
+var htmlclean = require('gulp-htmlclean');
+var cleanCSS = require('gulp-clean-css');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
 var paths = {
   src: 'src/**/*',
   srcHTML: 'src/**/*.html',
@@ -15,7 +18,7 @@ var paths = {
 
   dist: 'dist',
   distIndex: 'dist/index.html',
-  distCSS: 'tmp/**/*.css',
+  distCSS: 'dist/**/*.css',
   distJS: 'dist/**/*.js'
 };
 
@@ -71,3 +74,43 @@ gulp.task('serve', ['inject'], function() {
 gulp.task('watch', ['serve'], function() {
   gulp.watch(paths.src, ['inject']);
 });
+
+/* Building the dist */
+/* Setup html task to copy & clean html files from src to dist directory */
+gulp.task('html:dist', function() {
+  return gulp.src(paths.srcHTML)
+    .pipe(htmlclean())
+    .pipe(gulp.dest(paths.dist));
+});
+
+/* Setup css task to copy, concat and clean css files from src to dist directory */
+gulp.task('css:dist', function() {
+  return gulp.src(paths.srcCSS)
+    .pipe(concat('style.min.css'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(paths.dist));
+})
+
+/* Setup js task to copy, concat and uglify js files from src to dist directory */
+gulp.task('js:dist', function() {
+  return gulp.src(paths.srcJS)
+    .pipe(concat('script.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.dist));
+});
+
+/* Combine all building dist tasks together */
+gulp.task('copy:dist', ['html:dist', 'css:dist', 'js:dist']);
+
+/* Inject css and js files to index.html in dist folder */
+gulp.task('inject:dist', ['copy:dist'], function() {
+  var css = gulp.src(paths.distCSS);
+  var js = gulp.src(paths.distJS);
+  return gulp.src(paths.distIndex)
+    .pipe(inject(css, {relative: true }))
+    .pipe(inject(js, {relative: true }))
+    .pipe(gulp.dest(paths.dist));
+})
+
+gulp.task('build', ['inject:dist']);
+
